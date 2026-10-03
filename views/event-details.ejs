@@ -1,0 +1,165 @@
+<%- include("partials/header", {
+    title: event.title
+}) %>
+
+
+<section class="details-card">
+
+    <div class="details-header">
+
+        <span class="category">
+            <%= event.category %>
+        </span>
+
+        <span>
+            Organized by
+            <strong>
+                <%= event.organizer_name %>
+            </strong>
+        </span>
+
+    </div>
+
+
+    <h1>
+        <%= event.title %>
+    </h1>
+
+
+    <p class="large-description">
+        <%= event.description %>
+    </p>
+
+
+    <div class="details-grid">
+
+        <div>
+            <span>📅 Date</span>
+            <strong>
+                <%= event.event_date %>
+            </strong>
+        </div>
+
+
+        <div>
+            <span>🕐 Time</span>
+            <strong>
+                <%= event.event_time %>
+            </strong>
+        </div>
+
+
+        <div>
+            <span>📍 Venue</span>
+            <strong>
+                <%= event.venue %>
+            </strong>
+        </div>
+
+
+        <div>
+            <span>👥 Capacity</span>
+            <strong>
+                <%= registeredCount %>
+                /
+                <%= event.capacity %>
+            </strong>
+        </div>
+
+
+        <div>
+            <span>⏳ Registration Deadline</span>
+            <strong>
+                <%= event.registration_deadline %>
+            </strong>
+        </div>
+
+    </div>
+
+
+    <div class="details-actions">
+
+        <% if (
+            registration &&
+            registration.status === "registered"
+        ) { %>
+
+            <form
+                method="POST"
+                action="/events/<%= event.id %>/cancel"
+            >
+
+                <button class="btn danger">
+                    Cancel Registration
+                </button>
+
+            </form>
+
+
+            <span class="registered">
+                ✓ You're registered
+            </span>
+
+
+        <% } else if (
+            registeredCount < event.capacity
+        ) { %>
+
+            <form
+                method="POST"
+                action="/events/<%= event.id %>/register"
+            >
+
+                <button class="btn primary">
+                    Register Now
+                </button>
+
+            </form>
+
+
+        <% } else { %>
+
+            <% if (!waitlisted) { %>
+
+            <form
+                method="POST"
+                action="/events/<%= event.id %>/waitlist"
+            >
+
+                <button class="btn primary">
+                    Join Waitlist
+                </button>
+
+            </form>
+
+            <% } else { %>
+
+            <span class="registered">
+                ✓ You're on the waitlist
+            </span>
+
+            <% } %>
+
+        <% } %>
+
+
+        <% if (
+            user.role === "organizer" &&
+            user.id === event.organizer_id
+        ) { %>
+
+        <a
+            href="/events/<%= event.id %>/edit"
+            class="btn secondary"
+        >
+            Edit Event
+        </a>
+
+        <% } %>
+
+    </div>
+
+</section>
+
+
+<%- include("partials/footer") %>

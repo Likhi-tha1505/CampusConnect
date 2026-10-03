@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        <%= title || "CampusConnect" %>
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="/css/style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<header class="navbar">
+
+    <a
+        href="/dashboard"
+        class="logo"
+    >
+        Campus<span>Connect</span>
+    </a>
+
+
+    <% if (user) { %>
+
+    <nav>
+
+        <a href="/dashboard">
+            Dashboard
+        </a>
+
+        <a href="/events">
+            Events
+        </a>
+
+        <a href="/my-events">
+            My Events
+        </a>
+
+        <a href="/notifications">
+            Notifications
+        </a>
+
+        <% if (user.role === "organizer") { %>
+
+        <a href="/events/create">
+            Create Event
+        </a>
+
+        <% } %>
+
+    </nav>
+
+
+    <div class="profile">
+
+        <span>
+            Hi, <%= user.name.split(" ")[0] %>
+        </span>
+
+        <form
+            method="POST"
+            action="/logout"
+        >
+
+            <button class="logout">
+                Logout
+            </button>
+
+        </form>
+
+    </div>
+
+    <% } %>
+
+</header>
+
+
+<main class="container">

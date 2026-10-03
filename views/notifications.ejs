@@ -1,0 +1,66 @@
+<%- include("partials/header", {
+    title: "Notifications"
+}) %>
+
+
+<section class="page-heading">
+
+    <div>
+
+        <span class="eyebrow">
+            UPDATES
+        </span>
+
+        <h1>
+            Notifications
+        </h1>
+
+        <p>
+            Stay updated about your campus activities.
+        </p>
+
+    </div>
+
+</section>
+
+
+<div class="notification-list">
+
+    <% notifications.forEach(notification => { %>
+
+    <div class="notification">
+
+        <div class="notification-icon">
+            🔔
+        </div>
+
+
+        <div>
+
+            <strong>
+                <%= notification.message %>
+            </strong>
+
+            <small>
+                <%= notification.created_at %>
+            </small>
+
+        </div>
+
+    </div>
+
+    <% }) %>
+
+
+    <% if (!notifications.length) { %>
+
+    <div class="empty">
+        No notifications yet.
+    </div>
+
+    <% } %>
+
+</div>
+
+
+<%- include("partials/footer") %>

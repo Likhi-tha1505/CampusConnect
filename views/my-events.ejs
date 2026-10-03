@@ -1,0 +1,82 @@
+<%- include("partials/header", {
+    title: "My Events"
+}) %>
+
+
+<section class="page-heading">
+
+    <div>
+
+        <span class="eyebrow">
+            MY ACTIVITY
+        </span>
+
+        <h1>
+            My Registered Events
+        </h1>
+
+        <p>
+            Events you've registered for.
+        </p>
+
+    </div>
+
+</section>
+
+
+<div class="simple-list">
+
+    <% events.forEach(event => { %>
+
+    <div class="list-item">
+
+        <div>
+
+            <strong>
+                <%= event.title %>
+            </strong>
+
+            <small>
+                <%= event.event_date %>
+                ·
+                <%= event.event_time %>
+                ·
+                <%= event.venue %>
+            </small>
+
+        </div>
+
+
+        <a
+            href="/events/<%= event.id %>"
+            class="btn secondary"
+        >
+            View
+        </a>
+
+    </div>
+
+    <% }) %>
+
+
+    <% if (!events.length) { %>
+
+    <div class="empty">
+
+        You haven't registered for
+        any events yet.
+
+        <br><br>
+
+        <a href="/events">
+            Explore Events →
+        </a>
+
+    </div>
+
+    <% } %>
+
+</div>
+
+
+<%- include("partials/footer") %>

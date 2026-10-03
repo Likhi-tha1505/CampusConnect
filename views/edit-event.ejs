@@ -1,0 +1,194 @@
+<%- include("partials/header", {
+    title: "Edit Event"
+}) %>
+
+
+<section class="form-page">
+
+    <div class="form-heading">
+
+        <span class="eyebrow">
+            ORGANIZER
+        </span>
+
+        <h1>
+            Edit Event
+        </h1>
+
+    </div>
+
+
+    <form
+        method="POST"
+        action="/events/<%= event.id %>/edit"
+        class="big-form"
+    >
+
+        <label>
+            Event Name
+
+            <input
+                name="title"
+                value="<%= event.title %>"
+                required
+            >
+
+        </label>
+
+
+        <label>
+            Description
+
+            <textarea
+                name="description"
+                rows="5"
+                required
+            ><%= event.description %></textarea>
+
+        </label>
+
+
+        <div class="form-row">
+
+            <label>
+                Category
+
+                <select name="category">
+
+                    <option
+                        <%= event.category === "Technical"
+                        ? "selected" : "" %>
+                    >
+                        Technical
+                    </option>
+
+                    <option
+                        <%= event.category === "Cultural"
+                        ? "selected" : "" %>
+                    >
+                        Cultural
+                    </option>
+
+                    <option
+                        <%= event.category === "Sports"
+                        ? "selected" : "" %>
+                    >
+                        Sports
+                    </option>
+
+                    <option
+                        <%= event.category === "Workshop"
+                        ? "selected" : "" %>
+                    >
+                        Workshop
+                    </option>
+
+                    <option
+                        <%= event.category === "Other"
+                        ? "selected" : "" %>
+                    >
+                        Other
+                    </option>
+
+                </select>
+
+            </label>
+
+
+            <label>
+                Venue
+
+                <input
+                    name="venue"
+                    value="<%= event.venue %>"
+                    required
+                >
+
+            </label>
+
+        </div>
+
+
+        <div class="form-row">
+
+            <label>
+                Event Date
+
+                <input
+                    type="date"
+                    name="event_date"
+                    value="<%= event.event_date %>"
+                    required
+                >
+
+            </label>
+
+
+            <label>
+                Event Time
+
+                <input
+                    type="time"
+                    name="event_time"
+                    value="<%= event.event_time %>"
+                    required
+                >
+
+            </label>
+
+        </div>
+
+
+        <div class="form-row">
+
+            <label>
+                Capacity
+
+                <input
+                    type="number"
+                    name="capacity"
+                    value="<%= event.capacity %>"
+                    min="1"
+                    required
+                >
+
+            </label>
+
+
+            <label>
+                Registration Deadline
+
+                <input
+                    type="date"
+                    name="registration_deadline"
+                    value="<%= event.registration_deadline %>"
+                    required
+                >
+
+            </label>
+
+        </div>
+
+
+        <label>
+            Poster Image URL
+
+            <input
+                type="url"
+                name="image"
+                value="<%= event.image || '' %>"
+            >
+
+        </label>
+
+
+        <button class="btn primary">
+            Save Changes
+        </button>
+
+    </form>
+
+</section>
+
+
+<%- include("partials/footer") %>

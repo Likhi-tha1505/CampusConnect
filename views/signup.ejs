@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sign Up - CampusConnect</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body class="auth-page">
+
+    <div class="auth-container">
+
+        <!-- LEFT SIDE -->
+        <div class="auth-info">
+
+            <div class="brand">
+                <div class="brand-icon">CC</div>
+                <span>CampusConnect</span>
+            </div>
+
+            <div class="auth-info-content">
+
+                <span class="auth-badge">
+                    COLLEGE EVENT PLATFORM
+                </span>
+
+                <h1>
+                    Your campus.<br>
+                    <span>Your community.</span>
+                </h1>
+
+                <p>
+                    Discover workshops, hackathons, sports,
+                    cultural events and everything happening
+                    around your campus.
+                </p>
+
+                <div class="auth-features">
+
+                    <div class="auth-feature">
+                        <span>🎯</span>
+                        <div>
+                            <strong>Discover Events</strong>
+                            <small>Find events that interest you.</small>
+                        </div>
+                    </div>
+
+                    <div class="auth-feature">
+                        <span>🎟️</span>
+                        <div>
+                            <strong>Easy Registration</strong>
+                            <small>Register for events in seconds.</small>
+                        </div>
+                    </div>
+
+                    <div class="auth-feature">
+                        <span>🔔</span>
+                        <div>
+                            <strong>Stay Updated</strong>
+                            <small>Never miss an important event.</small>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- RIGHT SIDE -->
+        <div class="auth-form-section">
+
+            <div class="signup-card">
+
+                <div class="form-heading">
+
+                    <span class="form-icon">✨</span>
+
+                    <h2>Create your account</h2>
+
+                    <p>
+                        Join CampusConnect and explore campus life.
+                    </p>
+
+                </div>
+
+
+                <% if (error) { %>
+
+                    <div class="error-message">
+                        <span>⚠️</span>
+                        <%= error %>
+                    </div>
+
+                <% } %>
+
+
+                <form action="/signup" method="POST">
+
+                    <div class="form-group">
+
+                        <label for="name">
+                            Full Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="name"
+                            name="name"
+                            placeholder="Enter your full name"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="email">
+                            Email Address
+                        </label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="Enter your email address"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="password">
+                            Password
+                        </label>
+
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="Create a password"
+                            minlength="6"
+                            required
+                        >
+
+                        <small class="input-hint">
+                            Password must contain at least 6 characters.
+                        </small>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="role">
+                            Account Type
+                        </label>
+
+                        <select id="role" name="role">
+
+                            <option value="student">
+                                Student
+                            </option>
+
+                            <option value="organizer">
+                                Organizer
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <button type="submit" class="signup-btn">
+                        Create Account
+                        <span>→</span>
+                    </button>
+
+                </form>
+
+
+                <div class="form-divider">
+                    <span>Already a member?</span>
+                </div>
+
+
+                <a href="/login" class="login-link">
+                    Login to CampusConnect
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

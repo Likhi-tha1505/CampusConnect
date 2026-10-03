@@ -1,0 +1,86 @@
+<%- include("partials/header", {
+    title: "Login"
+}) %>
+
+
+<section class="auth-page">
+
+    <div class="auth-card">
+
+        <div class="auth-logo">
+            🎓
+        </div>
+
+        <h1>
+            Welcome back
+        </h1>
+
+        <p>
+            Sign in to your CampusConnect account.
+        </p>
+
+
+        <% if (error) { %>
+
+        <div class="alert">
+            <%= error %>
+        </div>
+
+        <% } %>
+
+
+        <form
+            method="POST"
+            action="/login"
+        >
+
+            <label>
+                Email
+
+                <input
+                    type="email"
+                    name="email"
+                    required
+                >
+
+            </label>
+
+
+            <label>
+                Password
+
+                <input
+                    type="password"
+                    name="password"
+                    required
+                >
+
+            </label>
+
+
+            <button
+                class="btn primary full"
+                type="submit"
+            >
+                Login
+            </button>
+
+        </form>
+
+
+        <p class="auth-switch">
+
+            Don't have an account?
+
+            <a href="/signup">
+                Sign up
+            </a>
+
+        </p>
+
+    </div>
+
+</section>
+
+
+<%- include("partials/footer") %>

@@ -1,0 +1,197 @@
+<%- include("partials/header", {
+    title: "Events"
+}) %>
+
+
+<section class="page-heading">
+
+    <div>
+
+        <span class="eyebrow">
+            EXPLORE
+        </span>
+
+        <h1>
+            Campus Events
+        </h1>
+
+        <p>
+            Find something interesting happening on campus.
+        </p>
+
+    </div>
+
+</section>
+
+
+<form
+    method="GET"
+    action="/events"
+    class="search-box"
+>
+
+    <input
+        type="text"
+        name="search"
+        value="<%= search %>"
+        placeholder="Search events..."
+    >
+
+
+    <select name="category">
+
+        <option value="">
+            All Categories
+        </option>
+
+        <option
+            value="Technical"
+            <%= category === "Technical"
+                ? "selected"
+                : "" %>
+        >
+            Technical
+        </option>
+
+        <option
+            value="Cultural"
+            <%= category === "Cultural"
+                ? "selected"
+                : "" %>
+        >
+            Cultural
+        </option>
+
+        <option
+            value="Sports"
+            <%= category === "Sports"
+                ? "selected"
+                : "" %>
+        >
+            Sports
+        </option>
+
+        <option
+            value="Workshop"
+            <%= category === "Workshop"
+                ? "selected"
+                : "" %>
+        >
+            Workshop
+        </option>
+
+        <option
+            value="Other"
+            <%= category === "Other"
+                ? "selected"
+                : "" %>
+        >
+            Other
+        </option>
+
+    </select>
+
+
+    <button class="btn primary">
+        Search
+    </button>
+
+</form>
+
+
+<div class="event-grid">
+
+    <% events.forEach(event => { %>
+
+    <article class="event-card">
+
+        <div class="event-top">
+
+            <span class="category">
+                <%= event.category %>
+            </span>
+
+            <span>
+                <%= event.event_date %>
+            </span>
+
+        </div>
+
+
+        <h2>
+            <%= event.title %>
+        </h2>
+
+
+        <p>
+            <%= event.description.substring(
+                0,
+                120
+            ) %>...
+        </p>
+
+
+        <div class="event-info">
+
+            <span>
+                📍 <%= event.venue %>
+            </span>
+
+            <span>
+                🕐 <%= event.event_time %>
+            </span>
+
+        </div>
+
+
+        <div class="capacity">
+
+            <span>
+                <%= event.registered_count %>
+                /
+                <%= event.capacity %>
+                registered
+            </span>
+
+            <div class="progress">
+
+                <i
+                    style="
+                    width:
+                    <%= Math.min(
+                        100,
+                        (event.registered_count /
+                        event.capacity) * 100
+                    ) %>%
+                    "
+                ></i>
+
+            </div>
+
+        </div>
+
+
+        <a
+            href="/events/<%= event.id %>"
+            class="btn secondary full"
+        >
+            View Event
+        </a>
+
+    </article>
+
+    <% }) %>
+
+
+    <% if (!events.length) { %>
+
+    <div class="empty">
+        No events found.
+    </div>
+
+    <% } %>
+
+</div>
+
+
+<%- include("partials/footer") %>

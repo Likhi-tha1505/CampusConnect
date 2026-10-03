@@ -1,0 +1,259 @@
+<%- include("partials/header", {
+    title: "Dashboard"
+}) %>
+
+<section class="page-heading">
+    <div>
+        <span class="eyebrow">
+            CAMPUS OVERVIEW
+        </span>
+
+        <h1>
+            Welcome, <%= user.name.split(" ")[0] %> 👋
+        </h1>
+
+        <p>
+            Discover what's happening around campus.
+        </p>
+    </div>
+
+    <a
+        href="/events"
+        class="btn primary"
+    >
+        Explore Events
+    </a>
+</section>
+
+
+<div class="stats">
+
+    <div class="stat-card">
+        <span>
+            Total Events
+        </span>
+
+        <strong>
+            <%= totalEvents %>
+        </strong>
+
+        <small>
+            Available on campus
+        </small>
+    </div>
+
+
+    <div class="stat-card">
+        <span>
+            My Registrations
+        </span>
+
+        <strong>
+            <%= registeredEvents %>
+        </strong>
+
+        <small>
+            Events you're attending
+        </small>
+    </div>
+
+
+    <!-- FIXED NOTIFICATIONS CARD -->
+    <div class="stat-card">
+        <span>
+            Notifications
+        </span>
+
+        <strong>
+            <%= Array.isArray(notifications) ? notifications.length : 0 %>
+        </strong>
+
+        <small>
+            Unread updates
+        </small>
+    </div>
+
+</div>
+
+
+<section class="section">
+
+    <div class="section-title">
+
+        <div>
+            <h2>
+                Upcoming Events
+            </h2>
+
+            <p>
+                Don't miss what's happening next.
+            </p>
+        </div>
+
+        <a href="/events">
+            View all →
+        </a>
+
+    </div>
+
+
+    <div class="event-grid">
+
+        <% upcomingEvents.forEach(event => { %>
+
+            <article class="event-card">
+
+                <div class="event-top">
+
+                    <span class="category">
+                        <%= event.category %>
+                    </span>
+
+                    <span>
+                        📅 <%= event.event_date %>
+                    </span>
+
+                </div>
+
+
+                <h3>
+                    <%= event.title %>
+                </h3>
+
+
+                <p>
+                    <%= event.description
+                        ? event.description.substring(0, 100)
+                        : "No description available." %>...
+                </p>
+
+
+                <div class="event-info">
+
+                    <span>
+                        📍 <%= event.venue %>
+                    </span>
+
+                    <span>
+                        🕐 <%= event.event_time %>
+                    </span>
+
+                </div>
+
+
+                <a
+                    href="/events/<%= event.id %>"
+                    class="btn secondary full"
+                >
+                    View Details
+                </a>
+
+            </article>
+
+        <% }) %>
+
+
+        <% if (!upcomingEvents.length) { %>
+
+            <div class="empty">
+                No upcoming events.
+            </div>
+
+        <% } %>
+
+    </div>
+
+</section>
+
+
+<% if (user.role === "organizer") { %>
+
+<section class="section">
+
+    <div class="section-title">
+
+        <div>
+            <h2>
+                My Created Events
+            </h2>
+
+            <p>
+                Manage your events.
+            </p>
+        </div>
+
+        <a href="/events/create">
+            + Create Event
+        </a>
+
+    </div>
+
+
+    <div class="simple-list">
+
+        <% if (organizerEvents && organizerEvents.length) { %>
+
+            <% organizerEvents.forEach(event => { %>
+
+                <div class="list-item">
+
+                    <div>
+
+                        <strong>
+                            <%= event.title %>
+                        </strong>
+
+                        <small>
+                            <%= event.event_date %>
+                            ·
+                            <%= event.venue %>
+                        </small>
+
+                    </div>
+
+
+                    <div class="list-actions">
+
+                        <a
+                            href="/events/<%= event.id %>/edit"
+                        >
+                            Edit
+                        </a>
+
+
+                        <form
+                            method="POST"
+                            action="/events/<%= event.id %>/delete"
+                        >
+
+                            <button
+                                type="submit"
+                                class="delete"
+                            >
+                                Delete
+                            </button>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            <% }) %>
+
+        <% } else { %>
+
+            <div class="empty">
+                You haven't created any events yet.
+            </div>
+
+        <% } %>
+
+    </div>
+
+</section>
+
+<% } %>
+
+
+<%- include("partials/footer") %>
